@@ -1,0 +1,29 @@
+[user]
+	email = gerard.sala@framna.com
+	name = Gerard Sala
+	signingKey = 
+
+[init]
+	defaultBranch = main
+
+[core]
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+
+[gpg]
+	format = openpgp
+	program = gpg
+
+[gpg "ssh"]
+	program = 
+	allowedSignersFile = 
+
+[commit]
+	gpgSign = false
+
+[tag]
+	forceSignAnnotated = false
+
+[push]
+  autoSetupRemote = true
+  default = current
