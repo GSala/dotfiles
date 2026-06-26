@@ -4,6 +4,11 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # ------------------------------------------------------------
+# User local binaries
+# ------------------------------------------------------------
+export PATH="$HOME/.local/bin:$PATH"
+
+# ------------------------------------------------------------
 # bun
 # ------------------------------------------------------------
 export PATH="$HOME/.bun/bin:$PATH"
@@ -58,6 +63,3 @@ alias ll="ls -la"
 alias gs="git status"
 alias gc="git commit"
 alias gcm="git commit -m"
-
-# Added by Android CLI installer
-export PATH="$PATH:/Users/gerardsala/.local/bin"

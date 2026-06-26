@@ -2,4 +2,4 @@
 # Supply-chain safety: ignore package versions published in the last n seconds.
 minimumReleaseAge = 604800 # (1 week)
 
-linker = "isolated"
+linker = "hoisted"
