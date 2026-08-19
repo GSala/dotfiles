@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(//**/.env)",
+      "Read(//**/.env.*)",
+      "Read(//**/*env*)"
+    ]
+  },
+  "model": "claude-fable-5[1m]",
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/gerardsala/.claude/statusline-command.sh",
+    "refreshInterval": 30
+  },
+  "enabledPlugins": {
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "cloudflare@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "figma@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true,
+    "slack@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "chrisbanes-skills": {
+      "source": {
+        "source": "github",
+        "repo": "chrisbanes/skills"
+      }
+    }
+  },
+  "effortLevel": "xhigh",
+  "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark",
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true
+}
