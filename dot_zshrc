@@ -15,6 +15,12 @@ export PATH="$HOME/.bun/bin:$PATH"
 
 
 # ------------------------------------------------------------
+# JetBrains Toolbox
+# ------------------------------------------------------------
+export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+
+
+# ------------------------------------------------------------
 # Android
 # ------------------------------------------------------------
 
@@ -47,6 +53,12 @@ fi
 if [[ -f "$(brew --prefix)/opt/fzf/shell/completion.zsh" ]]; then
   source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
 fi
+
+
+# ------------------------------------------------------------
+# OrbStack
+# ------------------------------------------------------------
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 
 # ------------------------------------------------------------
