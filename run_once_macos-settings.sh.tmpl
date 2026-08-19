@@ -1,0 +1,97 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+set -eu
+
+# Configures macOS system settings during first-time machine setup.
+# The sentinel file limits this script to a single run per machine.
+# To force a re-run, delete the sentinel and run chezmoi apply.
+SENTINEL="$HOME/.local/state/chezmoi/macos-settings-done"
+if [ -f "$SENTINEL" ]; then
+	exit 0
+fi
+
+# --- System bar ---
+
+# Show seconds in the menu bar clock.
+defaults write com.apple.menuextra.clock ShowSeconds -bool true
+
+# Hide the day of the week in the menu bar clock.
+defaults write com.apple.menuextra.clock ShowDayOfWeek -bool false
+
+# Hide the input source (keyboard layout) icon from the menu bar.
+defaults write com.apple.TextInputMenu visible -bool false
+
+# --- Control center ---
+
+# Show the battery percentage in the menu bar.
+defaults write com.apple.controlcenter BatteryShowPercentage -bool true
+
+# Always show the Sound control in the menu bar (18 = always, 24 = only when active).
+defaults -currentHost write com.apple.controlcenter Sound -int 18
+
+# Keep the Sound status item visible.
+defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true
+
+# --- Dock settings ---
+# Remove everything but active apps
+
+# Remove all pinned apps from the Dock.
+defaults write com.apple.dock persistent-apps -array
+
+# Add 4 small spacers to separate running apps.
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="small-spacer-tile";}'
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="small-spacer-tile";}'
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="small-spacer-tile";}'
+
+# Remove all pinned folders and files from the Dock.
+defaults write com.apple.dock persistent-others -array
+
+# Hide the recent apps section in the Dock.
+defaults write com.apple.dock show-recents -bool false
+
+# --- Finder ---
+
+# Show the path bar at the bottom of Finder windows.
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Always show file extensions.
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Use list view by default.
+defaults write com.apple.finder FXPreferredViewStyle -string Nlsv
+
+# --- Others ---
+
+# Use F1-F12 as standard function keys (hold fn for media keys).
+defaults write -g com.apple.keyboard.fnState -bool true
+
+# Disable automatic capitalization.
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+# Disable automatic dash substitution.
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# Disable automatic period insertion on double space.
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+
+# Disable smart quote substitution.
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# Disable automatic spelling correction.
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Disable automatic text completion.
+defaults write NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
+
+# Mark this machine as configured.
+mkdir -p "$(dirname "$SENTINEL")"
+touch "$SENTINEL"
+
+# --- Restart system processes so the settings take effect ---
+
+killall SystemUIServer
+killall ControlCenter
+killall Dock
+killall Finder
+{{ end -}}
