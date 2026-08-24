@@ -12,6 +12,7 @@ export PATH="$HOME/.local/bin:$PATH"
 # bun
 # ------------------------------------------------------------
 export PATH="$HOME/.bun/bin:$PATH"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 
 # ------------------------------------------------------------
